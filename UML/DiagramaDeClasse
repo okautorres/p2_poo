@@ -1,0 +1,242 @@
+@startuml
+' Exibir visibilidade de todos os membros
+skinparam classAttributeIconSize 0
+skinparam visibilityModifier true
+
+class AjusteEstoque {
+    - idAjuste: int
+    - produto: Produto
+    - quantidadeAjustada: int
+    - motivo: String
+    - dataAjuste: Date
+    + getIdAjuste(): int
+    + setIdAjuste(id: int)
+    + getProduto(): Produto
+    + setProduto(p: Produto)
+    + getQuantidadeAjustada(): int
+    + setQuantidadeAjustada(q: int)
+    + getMotivo(): String
+    + setMotivo(m: String)
+    + getDataAjuste(): Date
+    + setDataAjuste(d: Date)
+    + registrarAjuste(): void
+    + toString(): String
+}
+
+class Categoria {
+    - idCategoria: int
+    - nome: String
+    + getIdCategoria(): int
+    + setIdCategoria(id: int)
+    + getNome(): String
+    + setNome(n: String)
+    + cadastrar(): void
+    + listarProdutos(): void
+    + toString(): String
+}
+
+class Cliente {
+    - idCliente: int
+    - nome: String
+    - cpf: String
+    - telefone: String
+    - email: String
+    + getIdCliente(): int
+    + setIdCliente(id: int)
+    + getNome(): String
+    + setNome(n: String)
+    + getCpf(): String
+    + setCpf(c: String)
+    + getTelefone(): String
+    + setTelefone(t: String)
+    + getEmail(): String
+    + setEmail(e: String)
+    + cadastrar(): void
+    + atualizarDados(): void
+    + toString(): String
+}
+
+class EntradaEstoque {
+    - idEntrada: int
+    - produto: Produto
+    - quantidade: int
+    - dataEntrada: Date
+    - precoUnitario: double
+    - fornecedor: Fornecedor
+    + getIdEntrada(): int
+    + setIdEntrada(id: int)
+    + getProduto(): Produto
+    + setProduto(p: Produto)
+    + getQuantidade(): int
+    + setQuantidade(q: int)
+    + getDataEntrada(): Date
+    + setDataEntrada(d: Date)
+    + getPrecoUnitario(): double
+    + setPrecoUnitario(pu: double)
+    + getFornecedor(): Fornecedor
+    + setFornecedor(f: Fornecedor)
+    + registrarEntrada(): void
+    + toString(): String
+}
+
+class Fornecedor {
+    - idFornecedor: int
+    - nome: String
+    - cnpj: String
+    - email: String
+    - telefone: String
+    - endereco: String
+    + getIdFornecedor(): int
+    + setIdFornecedor(id: int)
+    + getNome(): String
+    + setNome(n: String)
+    + getCnpj(): String
+    + setCnpj(c: String)
+    + getEmail(): String
+    + setEmail(e: String)
+    + getTelefone(): String
+    + setTelefone(t: String)
+    + getEndereco(): String
+    + setEndereco(e: String)
+    + cadastrar(): void
+    + atualizarDados(): void
+    + toString(): String
+}
+
+class ItemPedidoFornecedor {
+    - idItemPedido: int
+    - pedidoFornecedor: PedidoFornecedor
+    - produto: Produto
+    - quantidade: int
+    - precoUnitario: double
+    + getIdItemPedido(): int
+    + setIdItemPedido(id: int)
+    + getPedidoFornecedor(): PedidoFornecedor
+    + setPedidoFornecedor(pf: PedidoFornecedor)
+    + getProduto(): Produto
+    + setProduto(p: Produto)
+    + getQuantidade(): int
+    + setQuantidade(q: int)
+    + getPrecoUnitario(): double
+    + setPrecoUnitario(pu: double)
+    + calcularSubtotal(): double
+    + toString(): String
+}
+
+class ItemVenda {
+    - idItemVenda: int
+    - venda: Venda
+    - produto: Produto
+    - quantidade: int
+    - precoUnitario: double
+    + getIdItemVenda(): int
+    + setIdItemVenda(id: int)
+    + getVenda(): Venda
+    + setVenda(v: Venda)
+    + getProduto(): Produto
+    + setProduto(p: Produto)
+    + getQuantidade(): int
+    + setQuantidade(q: int)
+    + getPrecoUnitario(): double
+    + setPrecoUnitario(pu: double)
+    + calcularSubtotal(): double
+    + toString(): String
+}
+
+class PedidoFornecedor {
+    - idPedido: int
+    - fornecedor: Fornecedor
+    - dataPedido: Date
+    - status: String
+    - itensPedido: List<ItemPedidoFornecedor>
+    + getIdPedido(): int
+    + setIdPedido(id: int)
+    + getFornecedor(): Fornecedor
+    + setFornecedor(f: Fornecedor)
+    + getDataPedido(): Date
+    + setDataPedido(d: Date)
+    + getStatus(): String
+    + setStatus(s: String)
+    + getItensPedido(): List<ItemPedidoFornecedor>
+    + setItensPedido(list: List<ItemPedidoFornecedor>)
+    + registrarPedido(): void
+    + adicionarItem(item: ItemPedidoFornecedor): void
+    + atualizarStatus(novoStatus: String): void
+    - processarEntrega(): void
+    + calcularValorTotalPedido(): double
+    + toString(): String
+}
+
+class Produto {
+    - idProduto: int
+    - nome: String
+    - codigoBarra: String
+    - precoVenda: double
+    - precoCompra: double
+    - estoque: int
+    - estoqueMin: int
+    - categoria: Categoria
+    - fornecedor: Fornecedor
+    + getIdProduto(): int
+    + setIdProduto(id: int)
+    + getNome(): String
+    + setNome(n: String)
+    + getCodigoBarra(): String
+    + setCodigoBarra(cb: String)
+    + getPrecoVenda(): double
+    + setPrecoVenda(pv: double)
+    + getPrecoCompra(): double
+    + setPrecoCompra(pc: double)
+    + getEstoque(): int
+    + setEstoque(e: int)
+    + getEstoqueMin(): int
+    + setEstoqueMin(em: int)
+    + getCategoria(): Categoria
+    + setCategoria(c: Categoria)
+    + getFornecedor(): Fornecedor
+    + setFornecedor(f: Fornecedor)
+    + cadastrar(): void
+    + atualizarEstoque(qtd: int): void
+    + verificarEstoqueMinimo(): boolean
+    + calcularMargemLucro(): double
+    + toString(): String
+}
+
+class Venda {
+    - idVenda: int
+    - dataVenda: Date
+    - valorTotal: double
+    - formaPagamento: String
+    - cliente: Cliente
+    - itensVenda: List<ItemVenda>
+    + getIdVenda(): int
+    + setIdVenda(id: int)
+    + getDataVenda(): Date
+    + setDataVenda(d: Date)
+    + getValorTotal(): double
+    + getFormaPagamento(): String
+    + setFormaPagamento(fp: String)
+    + getCliente(): Cliente
+    + setCliente(c: Cliente)
+    + getItensVenda(): List<ItemVenda>
+    + setItensVenda(list: List<ItemVenda>)
+    + registrarVenda(): void
+    + adicionarItem(item: ItemVenda): void
+    + calcularValorTotal(): double
+    + finalizarVenda(): void
+    + toString(): String
+}
+
+' Relacionamentos e cardinalidades
+Produto "1" <-- "0..*" AjusteEstoque : ajusta
+Produto "1" <-- "0..*" EntradaEstoque : abastece
+Fornecedor "1" <-- "0..*" EntradaEstoque : fornece
+Fornecedor "1" <-- "0..*" PedidoFornecedor : recebe
+PedidoFornecedor "1" <-- "0..*" ItemPedidoFornecedor : contem
+ItemPedidoFornecedor "*" --> "1" Produto : referencia
+Categoria "1" <-- "0..*" Produto : categoriza
+Produto "1" <-- "0..*" ItemVenda : vendidoEm
+Venda "1" <-- "0..*" ItemVenda : contem
+Cliente "1" <-- "0..*" Venda : realiza
+
+@enduml
